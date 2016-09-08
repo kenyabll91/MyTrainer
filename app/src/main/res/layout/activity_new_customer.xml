@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:padding="10dp">
+
+
+
+    <fragment
+        android:name="com.bignerdranch.android.mytrainer.fragment_logged_in"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout="@layout/fragment_fragment_logged_in"
+        android:id="@+id/fragment"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/FullName"
+        android:layout_alignEnd="@+id/FullName"
+        android:layout_marginRight="60dp"
+        android:layout_marginEnd="60dp"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:text="Full Name:"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView"
+        android:layout_alignTop="@+id/fragment"
+        android:layout_alignLeft="@+id/fragment"
+        android:layout_alignStart="@+id/fragment"
+        android:layout_marginTop="56dp"/>
+
+    <EditText
+        android:id="@+id/FullName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:layout_alignTop="@+id/textView"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:text="Email:"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView2"
+        android:layout_alignLeft="@+id/fragment"
+        android:layout_alignStart="@+id/fragment"
+        android:layout_below="@+id/FullName"/>
+
+    <EditText
+        android:id="@+id/Email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:layout_alignLeft="@+id/fragment"
+        android:layout_alignStart="@+id/fragment"
+        android:layout_below="@+id/FullName"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:text="Address:"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView3"
+        android:layout_below="@+id/Email"
+        android:layout_alignLeft="@+id/fragment"
+        android:layout_alignStart="@+id/fragment"/>
+
+    <EditText
+        android:id="@+id/Address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPostalAddress"
+        android:layout_below="@+id/Email"
+        android:layout_alignLeft="@+id/fragment"
+        android:layout_alignStart="@+id/fragment"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:text="Phone Number:"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView4"
+        android:layout_below="@+id/Address"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+
+    <EditText
+        android:id="@+id/PhoneNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPhonetic"
+        android:layout_below="@+id/Address"
+        android:layout_alignLeft="@+id/fragment"
+        android:layout_alignStart="@+id/fragment"/>
+
+    <Button
+        android:id="@+id/Register"
+        android:text="Register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/fragment"
+        android:layout_alignLeft="@+id/fragment"
+        android:layout_alignStart="@+id/fragment"/>
+
+
+
+
+
+</RelativeLayout>
