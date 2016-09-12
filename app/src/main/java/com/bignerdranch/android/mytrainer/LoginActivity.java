@@ -21,6 +21,8 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
@@ -38,6 +40,25 @@ import static android.Manifest.permission.READ_CONTACTS;
 
 public class LoginActivity extends FragmentActivity {
 
+    public class Logout extends FragmentActivity {
 
+        @Override
+        public boolean onCreateOptionsMenu(Menu menu) {
+            getMenuInflater().inflate(R.menu.main_menu_options, menu);
+            return true;
+        }
+
+        @Override
+        public boolean onOptionsItemSelected(MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.logout_settings:
+                    return true;
+                default:
+                    return super.onOptionsItemSelected(item);
+            }
+
+
+        }
+    }
 }
 
