@@ -1,11 +1,17 @@
 package com.bignerdranch.android.mytrainer;
 
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class CustomerListActivity extends FragmentActivity {
+public class CustomerListActivity extends SingleFragmentActivity {
 
+    @Override
+    protected Fragment createFragment() {
+        return new CustomerListFragment();
+    }
+/*
     public class Logout extends FragmentActivity {
 
         @Override
@@ -23,5 +29,5 @@ public class CustomerListActivity extends FragmentActivity {
                     return super.onOptionsItemSelected(item);
             }
         }
-    }
+    }*/
 }
