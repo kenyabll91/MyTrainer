@@ -6,7 +6,19 @@
               android:layout_height="match_parent"
               android:padding="10dp">
 
+<ImageView
+    android:layout_width="100dp"
+    android:layout_height="100dp"
+    android:layout_gravity="center"
+    android:background="#f0f0f0"
+    android:id="@+id/customerimage"/>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="take picture"
+        android:id="@+id/imageB"/>
 
     <TextView
         android:layout_width="wrap_content"

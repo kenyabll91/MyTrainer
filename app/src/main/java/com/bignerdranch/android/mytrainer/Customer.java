@@ -53,4 +53,8 @@ public class Customer {
     public Customer(UUID id) {
         mId = id;
     }
+
+    public String getPhotoFilename() {
+        return "IMG_" + getId().toString() + ".jpg";
+    }
 }

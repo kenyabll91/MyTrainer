@@ -5,7 +5,9 @@ import android.content.Context;
 import android.database.ContentObservable;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Environment;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -73,6 +75,17 @@ public class CustomerLab {
         } finally {
             cursor.close();
         }
+    }
+
+    public File getPhotoFile(Customer customer) {
+        File externalFileDir = mContext
+                .getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+
+        if (externalFileDir == null) {
+            return null;
+        }
+
+        return new File(externalFileDir, customer.getPhotoFilename());
     }
 
     public void updateCustomer(Customer customer) {

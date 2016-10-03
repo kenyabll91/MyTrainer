@@ -1,7 +1,13 @@
 package com.bignerdranch.android.mytrainer;
 
 
+import android.app.Activity;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
@@ -12,19 +18,28 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
+import java.io.File;
 import java.util.UUID;
 
 public class NewCustomerFragment extends Fragment {
 
     private static final String ARG_CUSTOMER_ID = "customer_id";
 
+    private static final int REQUEST_PHOTO= 1;
+
     private Customer mCustomer;
     private EditText mFullName;
     private EditText mEmail;
     private EditText mAddress;
     private EditText mPhoneNumber;
+    private Button mButton;
+    private ImageView mImageView;
+    private File mPhotoFile;
+
 
     public static NewCustomerFragment newInstance(UUID customerId) {
         Bundle args = new Bundle();
@@ -42,6 +57,7 @@ public class NewCustomerFragment extends Fragment {
         super.onCreate(savedInstanceState);
         UUID customerId = (UUID) getArguments().getSerializable(ARG_CUSTOMER_ID);
         mCustomer = CustomerLab.get(getActivity()).getCustomer(customerId);
+        mPhotoFile = CustomerLab.get(getActivity()).getPhotoFile(mCustomer);
     }
 
     @Override
@@ -136,6 +152,29 @@ public class NewCustomerFragment extends Fragment {
             }
         });
 
+        PackageManager packageManager = getActivity().getPackageManager();
+
+        mButton = (Button) view.findViewById(R.id.imageB);
+        final Intent captureImage = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+        boolean canTakePhoto = mPhotoFile != null &&
+                captureImage.resolveActivity(packageManager) != null;
+        mButton.setEnabled(canTakePhoto);
+
+        if (canTakePhoto) {
+            Uri uri = Uri.fromFile(mPhotoFile);
+            captureImage.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+        }
+
+        mButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivityForResult(captureImage, REQUEST_PHOTO);
+            }
+
+        });
+        mImageView = (ImageView) view.findViewById(R.id.customerimage);
+
         return view;
     }
 
@@ -154,5 +193,26 @@ public class NewCustomerFragment extends Fragment {
                     return super.onOptionsItemSelected(item);
             }*/
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode != Activity.RESULT_OK) {
+            return;
+        }
+
+        if (requestCode == REQUEST_PHOTO) {
+            updatePhotoView();
+        }
+    }
+
+    private void updatePhotoView() {
+        if (mPhotoFile == null || !mPhotoFile.exists()) {
+            mImageView.setImageDrawable(null);
+        } else {
+            Bitmap bitmap = PictureUtils.getScaledBitmap(
+                    mPhotoFile.getPath(), getActivity());
+            mImageView.setImageBitmap(bitmap);
+        }
     }
 }
